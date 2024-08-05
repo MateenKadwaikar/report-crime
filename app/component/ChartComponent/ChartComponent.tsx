@@ -27,7 +27,7 @@ const chartData = [
 ]
 export default function ChartComponent() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+    <ChartContainer config={chartConfig} className="min-h-[50px] w-full">
       <BarChart data={chartData}>
         <Bar dataKey="value" />
       </BarChart>

@@ -24,7 +24,6 @@ export function Hooks() {
       return;
     }
     setSelectedId(value);
-    console.log(value);
     setIsOpen(true);
   };
   const onCancelHandler = () => {
@@ -78,8 +77,8 @@ export function Hooks() {
                     <span>Details</span>
                   </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <button
+                <DropdownMenuItem >
+                  <Button variant={'destructive'}
                     className="flex justify-evenly items-start w-full"
                     onClick={() => onDeleteHandler(original?.id)}
                   >
@@ -87,7 +86,7 @@ export function Hooks() {
                       <Trash size={16} />
                     </span>
                     <span>Delete</span>
-                  </button>
+                  </Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

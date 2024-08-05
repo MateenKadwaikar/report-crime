@@ -12,3 +12,6 @@ export const convertMillisecondsToDate = ({
   }
   return format(new Date(date), formatStr);
 };
+
+export const isNotEmptyObject = (obj: {} | undefined) =>
+  (obj != null && Object.keys(obj).length) || false;

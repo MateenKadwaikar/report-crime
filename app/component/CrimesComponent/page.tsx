@@ -5,6 +5,7 @@ import { DataTable } from "../CommonComponent/TableComponent";
 import { getCrimes } from "../actions/crime-service";
 import { useEffect, useState } from "react";
 import { ICrime } from "@/app/model/Type";
+import RefreshButtonComponent from "../CommonComponent/RefreshButtonComponent";
 
 export default function CrimesComponent() {
   const getCrime = async () =>
@@ -14,10 +15,15 @@ export default function CrimesComponent() {
   useEffect(() => {
     getCrime();
   }, []);
+
+  const onRefreshHandler = () => getCrime();
   return (
-    <div className="container mx-auto my-auto max-h-fit">
+    <div className="container mx-auto  min-h-fit">
       <DataTable columns={columns} data={crime}>
-        <AddCrimeComponent />
+        <div className="flex gap-2">
+          <RefreshButtonComponent onRefrehBtnHandler={onRefreshHandler} />
+          <AddCrimeComponent />
+        </div>
       </DataTable>
     </div>
   );

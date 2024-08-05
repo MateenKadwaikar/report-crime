@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 import React from "react";
 
@@ -37,9 +38,14 @@ function AlertComponent(props: Readonly<Props>) {
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onCancelHandler}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onContinueHandler}>
-            Continue
+          <AlertDialogCancel onClick={onCancelHandler}>
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className={buttonVariants({ variant: "destructive" })}
+            onClick={onContinueHandler}
+          >
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
