@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @unique(map: "sqlite_autoindex_Users_1") @default(autoincrement())
+  name     String
+  roleId   Int      @unique
+  location Int
+  crimes   Crimes[]
+}
+
+model Crimes {
+  id        Int        @id @unique @default(autoincrement())
+  title     String
+  location  Int
+  photo     String?
+  createdat String?
+  updatedat String?
+  status    Int?       @default(1)
+  userId    Int
+  isdelete  Int?       @default(0)
+  comments  Comments[]
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model Comments {
+  id      Int    @id @unique(map: "sqlite_autoindex_Remarks_1") @default(autoincrement())
+  remark  String
+  crimeId Int
+  crimes  Crimes @relation(fields: [crimeId], references: [id])
+}
+
+model Locations {
+  id   Int    @id @unique(map: "sqlite_autoindex_Locations_1") @default(autoincrement())
+  name String
+}
+
+model Roles {
+  id   Int    @id @unique(map: "sqlite_autoindex_Roles_1") @default(autoincrement())
+  name String
+}
+
+model Status {
+  id   Int    @id @unique(map: "sqlite_autoindex_Status_1") @default(autoincrement())
+  name String
+}
