@@ -17,3 +17,4 @@ There are some things to complete.
 3. Loading Skeleton for Table and Details records
 4. Loading on Save Crimes.
 5. Uploading pictures if needed.
+6. Fixing console issues.
