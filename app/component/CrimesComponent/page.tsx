@@ -8,9 +8,12 @@ import { ICrime } from "@/app/model/Type";
 import RefreshButtonComponent from "../CommonComponent/RefreshButtonComponent";
 
 export default function CrimesComponent() {
-  const getCrime = async () =>
-    await getCrimes().then((crimes) => setCrime(crimes));
   const [crime, setCrime] = useState<ICrime[]>([]);
+
+  const getCrime = async () => {
+    setCrime([]);
+    return await getCrimes().then((crimes) => setCrime(crimes));
+  };
   const { columns } = Hooks();
   useEffect(() => {
     getCrime();

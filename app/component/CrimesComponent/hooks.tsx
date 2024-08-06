@@ -30,7 +30,10 @@ export function Hooks() {
     setIsOpen(false);
   };
   const onContinueHandler = async () => {
-    await deleteCrime(selectedId).then((response) => console.log(response));
+    await deleteCrime(selectedId).then((response) => {
+      setIsOpen(false);
+      console.log(response);
+    });
   };
   const columns: ColumnDef<ICrime>[] = [
     {
@@ -77,8 +80,9 @@ export function Hooks() {
                     <span>Details</span>
                   </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem >
-                  <Button variant={'destructive'}
+                <DropdownMenuItem>
+                  <Button
+                    variant={"destructive"}
                     className="flex justify-evenly items-start w-full"
                     onClick={() => onDeleteHandler(original?.id)}
                   >
@@ -95,7 +99,7 @@ export function Hooks() {
                 isOpen={isOpen}
                 onContinueHandler={onContinueHandler}
                 onCancelHandler={onCancelHandler}
-              ></AlertComponent>
+              />
             ) : null}
           </>
         );

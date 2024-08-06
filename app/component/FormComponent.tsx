@@ -1,13 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -19,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import { ICrime, IDropdownLocation, ILocation } from "../model/Type";
+import { IDropdownLocation } from "../model/Type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Popover,
@@ -35,10 +29,10 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { useEffect, useState } from "react";
-import { getLocations } from "./actions/location-service";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { z } from "zod";
+import { useFormStatus } from "react-dom";
 
 export const FormSchema = z.object({
   title: z.string({
@@ -56,6 +50,17 @@ type Props = {
   locations: IDropdownLocation[];
 };
 
+const SubmitBtnComponent = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <DialogFooter>
+      <Button type="submit" disabled={pending}>
+        {pending ? "Loading..." : "Save"}
+      </Button>
+    </DialogFooter>
+  );
+};
 export default function AddCrimeFormComponent({
   onSubmit,
   locations,
@@ -65,7 +70,6 @@ export default function AddCrimeFormComponent({
   });
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string>("");
-
   return (
     <Form {...form}>
       <form onSubmit={form?.handleSubmit(onSubmit)}>
@@ -162,10 +166,8 @@ export default function AddCrimeFormComponent({
             )}
           />
         </div>
-        <DialogFooter>
-          <Button type="submit">Save</Button>
-        </DialogFooter>
+        <SubmitBtnComponent />
       </form>
     </Form>
-  )
+  );
 }

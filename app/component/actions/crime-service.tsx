@@ -4,7 +4,7 @@ import { ICrime } from "@/app/model/Type";
 import { FormSchema } from "../FormComponent";
 import { z } from "zod";
 
-export async function postCrime(data:  z.infer<typeof FormSchema>) {
+export async function postCrime(data: z.infer<typeof FormSchema>) {
   const request = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}crimes`, {
     method: "POST",
     body: JSON.stringify(data),
@@ -13,7 +13,9 @@ export async function postCrime(data:  z.infer<typeof FormSchema>) {
 }
 
 export async function getCrimes(): Promise<ICrime[]> {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}crimes`);
+  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}crimes`, {
+    cache: "no-store",
+  });
   return data.json();
 }
 export async function deleteCrime(id: number) {
